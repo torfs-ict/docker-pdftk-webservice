@@ -2,7 +2,7 @@ FROM php:7.2-cli-alpine
 
 # Container configuration
 EXPOSE 80
-ENTRYPOINT php /app/bin/console server:RUN 0.0.0.0:80
+ENTRYPOINT php /pdftk-service/bin/console server:run 0.0.0.0:80
 
 # Install pdftk
 RUN apk update && apk upgrade \
@@ -15,6 +15,6 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Install the application
 ENV APP_ENV prod
-COPY . /app
-WORKDIR /app
+COPY . /pdftk-service
+WORKDIR /pdftk-service
 RUN composer install
