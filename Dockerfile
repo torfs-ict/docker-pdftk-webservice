@@ -13,6 +13,10 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV COMPOSER_NO_INTERACTION=1
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Configure PHP
+RUN mv $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
+COPY docker/pdftk.ini $PHP_INI_DIR/conf.d/
+
 # Install the application
 ENV APP_ENV prod
 COPY . /pdftk-service
