@@ -35,6 +35,7 @@ class ApiController extends AbstractController
                 $this->logger->info($buffer);
             }
         });
+        $process->wait();
         $this->logger->info('Finished pdftk', ['exit_code' => $ret]);
     }
 
