@@ -1,8 +1,4 @@
-FROM php:7.2-cli-alpine
-
-# Container configuration
-EXPOSE 80
-ENTRYPOINT php /pdftk-service/bin/console server:run 0.0.0.0:80
+FROM richarvey/nginx-php-fpm
 
 # Install pdftk
 RUN apk update && apk upgrade \
@@ -15,6 +11,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Install the application
 ENV APP_ENV prod
+ENV WEBROOT=/pdftk-service/public
+ADD docker/nginx.conf /etc/nginx/sites-available/default.conf
 COPY . /pdftk-service
 WORKDIR /pdftk-service
 RUN composer install
