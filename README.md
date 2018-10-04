@@ -15,12 +15,15 @@ $ docker pull torfsict/docker-pdftk-webservice
 $ docker build -t docker-pdftk-webservice .
 ```
 
-## Run - example
+## Run
+
+Using a locally built version:
+
 ```bash
 $ docker run -d -p 80 --name pdftk docker-pdftk-webservice
 ```
 
-or if you use the pre-build version
+Or if you use the pre-built version:
 
 ```bash
 $ docker run -d -p 80 --name pdftk torfsict/docker-pdftk-webservice
@@ -36,7 +39,7 @@ be added on request.
 Post the files you want to merge to the server and get the merged file in return.
 
 ```bash
-$ curl -F file[]=@file1.pdf -F file[]=@file2.pdf http://localhost/merge > merged.pdf
+$ curl -F files[]=@file1.pdf -F files[]=@file2.pdf http://localhost/merge > merged.pdf
 ```
 
 ### Ping
